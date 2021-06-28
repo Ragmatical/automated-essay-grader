@@ -16,40 +16,38 @@ import os
 
 
 
-print "***************************************************************************"
-print "***************************************************************************"
+print("***************************************************************************")
+print("***************************************************************************")
 
-print '''
+print('''
 \t        ##            ########       ########
 \t      ##  ##          ##             ##
 \t     ##    ##         #####          ##
 \t    ##########        #####          ##    ##
 \t   ##        ##       ##             ##    ##
 \t  ##          ##      #########      ########
+''')
 
-'''
-
-print '''
+print('''
 \t  DEVELOPED BY :-             GUIDED BY :-
 \t
 \t  Karthik R Prasad
 \t  Aparna N                    Dr. B Narsing Rao
 \t  Apoorva Rao B
+''')
 
-'''
-
-print "***************************************************************************\n\n"
+print("***************************************************************************\n\n")
 
 
 #open essay
-print "Enter the name(path) of file containing the Essay to be graded :: "
+print("Enter the name(path) of file containing the Essay to be graded :: ")
 sourceFileName = str(raw_input(" >> "))
 	#sourceFileName = str(sys.argv[1])
 	#sourceFileName = "./Sample_Essays/essay2.txt"
 sourceFile = open(sourceFileName, "r")
 
-print
-print
+print()
+print()
 
 	#print "Enter the name(path) for the generated html report file :: "
 	#outputFileName = str(raw_input(" >> "))
@@ -64,16 +62,16 @@ outputFileName = "./Reports/" + os.path.splitext(sourceFileBaseName)[0] + ".html
 #read essay
 essay = sourceFile.read()
 
-print
-print
+print()
+print()
 
-print "::::::::::::::::::::::::::::::::YOUR ESSAY:::::::::::::::::::::::::::::::::::::"
-print
-print essay
-print
-print ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-print
-print "Please Wait while we generate statistics for your essay........"
+print("::::::::::::::::::::::::::::::::YOUR ESSAY:::::::::::::::::::::::::::::::::::::")
+print()
+print(essay)
+print()
+print(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+print()
+print("Please Wait while we generate statistics for your essay........")
 
 #Statistics
 wordCount = getWordCount(essay)
@@ -83,41 +81,39 @@ avgSentLen = getAvgSentenceLength(essay)
 stdDevSentLen = getStdDevSentenceLength(essay)
 
 
-print
-print "Please Wait while we perform spell check on your essay........"
+print()
+print("Please Wait while we perform spell check on your essay........")
 
 #Spellings
 numMisspelt, misspeltWordSug = spellCheck(essay)
 
 
-print
-print "Please Wait while we analyse the Grammar and Structure of your essay........\n"
+print()
+print("Please Wait while we analyse the Grammar and Structure of your essay........\n")
 
 #Grammar
 grammarCumScore, grammarSentScore = getGrammarScore(essay)
 
 
-print
-print "Please Wait while we analyse the Coherence of your essay........"
+print()
+print("Please Wait while we analyse the Coherence of your essay........")
 
 #Coherence
 coherenceScore = 3 #getCoherenceMeasure(essay)
 
 #Overall
 overallScore = str(format((((1-(float(numMisspelt)/wordCount))*5) + grammarCumScore + coherenceScore)/3, '.2f'))
-print ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+print(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 
 
 
 s = '''<!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<title>Automated Essay Grader</title>
 	<meta charset ="utf-8" />
 	<link type="text/css" rel = "stylesheet" href = "../style.css" />
 </head>
-
 <body>
 	<div id = "canvas">
 	<div>
@@ -126,7 +122,6 @@ s = '''<!DOCTYPE html>
 	
 
 s = s + '''<br /> <hr /> <hr /> <br />
-
 		<div style="float:left; font-size:18pt" id = "scoretable">
 			<img src = "../images/grade.jpg" />
 			<h2> Overall Score</h2>
@@ -220,24 +215,19 @@ s = s + '''</div></div> <br /> <hr /> <hr /> <br />
 	</div>
 	
 </body>
-
 </html>
-
-
 '''
 
 outputFile = open(outputFileName,"w")
 outputFile.write(s)
 
-print
-print
+print()
+print()
 
-print "Essay has been Graded and the Score Report has been generated!!"
-print "\n\nThank You for using our Automated Essay Grader\n"
+print("Essay has been Graded and the Score Report has been generated!!")
+print("\n\nThank You for using our Automated Essay Grader\n")
 
-print "***************************************************************************"
-print "***************************************************************************"
+print("***************************************************************************")
+print("***************************************************************************")
 
 webbrowser.open(outputFileName)
-
-
